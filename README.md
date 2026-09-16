@@ -20,29 +20,6 @@ A modern personal website featuring live local time, dynamic time-of-day greetin
 
 ---
 
-## 🛠️ 如何修正 GitHub Pages Deployments 錯誤
-
-如果在 GitHub 上看到 Actions 或 Deployments 出現 ❌ 紅色驚嘆號或 `404 Not Found`，通常是因為新建立的 GitHub 倉庫預設尚未設定 Pages 來源。請依照以下步驟在 30 秒內解決：
-
-### 方案 A：直接從 Branch 部署（最推薦、最不容易出錯）
-1. 進入你的 GitHub 倉庫頁面：[https://github.com/joshu0601/0916/settings/pages](https://github.com/joshu0601/0916/settings/pages)
-2. 在 **Build and deployment** > **Source** 下拉選單中，選擇 **Deploy from a branch**。
-3. 在下方 Branch 選單中：
-   - 選擇 **`main`**（或 **`gh-pages`**）分支。
-   - 資料夾選擇 **`/ (root)`**。
-   - 點擊 **Save**。
-4. 等待約 30 秒至 1 分鐘，重新整理頁面，頂端就會出現綠色勾勾，網站正式上線於：
-   👉 **[https://joshu0601.github.io/0916/](https://joshu0601.github.io/0916/)**
-
-### 方案 B：使用 GitHub Actions 自動化部署
-1. 進入 [https://github.com/joshu0601/0916/settings/pages](https://github.com/joshu0601/0916/settings/pages)
-2. 在 **Build and deployment** > **Source** 中選擇 **GitHub Actions**。
-3. 進入 [Settings > Actions > General](https://github.com/joshu0601/0916/settings/actions)
-4. 滑到最底部的 **Workflow permissions**，選擇 **Read and write permissions**，並點擊 **Save**。
-5. 到 **Actions** 分頁點選最新運行的 workflow 或重新執行（Re-run all jobs），即可順利部署完成！
-
----
-
 ## 🔄 專案架構與工作流程 (Workflows)
 
 ### 1. 前端客戶端資料流 (Client Runtime Data Flow)
