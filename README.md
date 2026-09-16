@@ -1,136 +1,132 @@
-# 0916 — Personal Web & Real-Time Clock
+# 0916 — Joshu's Personal Space & Real-Time Clock
 
 ![Website Preview](image.png)
 
-A modern personal website featuring live local time, dynamic time-of-day greetings, interactive profile customization, global world clocks, and multiple visual themes.
+A modern personal website featuring live local time, dynamic time-of-day greetings, interactive profile customization, core technical skills, featured projects showcase, and multiple visual themes.
 
-🌐 **Live Demo**: [https://joshu0601.github.io/0916/](https://joshu0601.github.io/0916/)
+🌐 **線上網站 (Live Demo)**: [https://joshu0601.github.io/0916/](https://joshu0601.github.io/0916/)
 
 ---
 
-## 🔄 Project Architecture & Workflow
+## 📋 本作業 5 大核心功能檢驗表 (Requirements Checklist)
 
-### 1. Application Runtime Data Flow
+| 序號 | 項目 (Feature) | 頁面呈現與實作說明 (Implementation Details) |
+|:---:|:---|:---|
+| **👤 1** | **Profile (個人介紹)** | • **姓名**：Joshu<br>• **個人頭像**：自定義 3D 幾何賽博美學 Avatar（支援自訂網址）<br>• **科系**：資訊工程學系 (Computer Science & Information Engineering)<br>• **專長**：Web Dev · AI/ML · IoT · 系統設計<br>• **自我介紹**：熱愛探索前沿軟體架構、人機互動介面與人工智慧應用，致力於打造高效能、具直覺美感與流暢互動體驗的現代化數位產品。 |
+| **🛠 2** | **Skills (核心技能)** | 至少列出 3 項技能，本專案完整呈現 6 大領域：<br>1. **Python**：數據分析、ML 模型推論與後端服務<br>2. **C / C++**：演算法、底層資料結構與嵌入式開發<br>3. **Web Development**：HTML5, Modern CSS (Glassmorphism), Vanilla JS<br>4. **Machine Learning & AI**：預測模型、神經網路與邊緣運算<br>5. **IoT (物聯網應用)**：微控制器整合、MQTT 輕量級協議<br>6. **Data Analysis**：數據清洗、統計分析與 Pandas/NumPy 視覺化 |
+| **🚀 3** | **Projects (專案作品)** | • **專案 1 (現正上線)**：`0916 — Personal Web & Live Clock`<br>  - 技術：HTML5, Modern CSS, Vanilla JS, Web Audio API, GitHub Actions<br>  - 連結：[GitHub Repo](https://github.com/joshu0601/0916) · [Live Demo](https://joshu0601.github.io/0916/)<br>• **專案 2 (本學期預計完成)**：`Smart Edge AI & IoT Assistant`<br>  - 說明：微控制器與輕量化 ML 之智慧環境監測系統，微秒級低延遲感測與雲端告警<br>  - 技術：Python, C/C++, IoT, Machine Learning, MQTT |
+| **🕐 4** | **Live Clock (即時時鐘)** | • **即時時間更新**：使用 JavaScript `requestAnimationFrame` 與系統時鐘同步，精確顯示 `HH : MM : SS`<br>• **功能亮點**：AM/PM 指示、秒數進度條 (0-60s)、即時指針鐘 (Analog) 雙視圖切換、本地時區自動偵測 (`Intl.DateTimeFormat`) 與 UTC 時差計算、今日時間流逝百分比 |
+| **🎨 5** | **Personal Design (個人風格)** | • **視覺美學**：極致毛玻璃擬態 (Glassmorphism) 與動態漂浮光暈背景 (Floating Mesh Glow)<br>• **4 款主題即時切換**：Midnight Obsidian (暗黑星系)、Aurora Borealis (極光翡翠)、Sunset Horizon (日落暖霞)、Daylight Minimal (極簡白日)<br>• **字型搭配**：Google Fonts（Plus Jakarta Sans、Space Grotesk、JetBrains Mono、Noto Sans TC）<br>• **微互動**：卡片 Hover 上浮懸停、Web Audio API 擬真音效開關、自訂資料 Modal 與 localStorage 本地持久化 |
+
+---
+
+## 🛠️ 如何修正 GitHub Pages Deployments 錯誤
+
+如果在 GitHub 上看到 Actions 或 Deployments 出現 ❌ 紅色驚嘆號或 `404 Not Found`，通常是因為新建立的 GitHub 倉庫預設尚未設定 Pages 來源。請依照以下步驟在 30 秒內解決：
+
+### 方案 A：直接從 Branch 部署（最推薦、最不容易出錯）
+1. 進入你的 GitHub 倉庫頁面：[https://github.com/joshu0601/0916/settings/pages](https://github.com/joshu0601/0916/settings/pages)
+2. 在 **Build and deployment** > **Source** 下拉選單中，選擇 **Deploy from a branch**。
+3. 在下方 Branch 選單中：
+   - 選擇 **`main`**（或 **`gh-pages`**）分支。
+   - 資料夾選擇 **`/ (root)`**。
+   - 點擊 **Save**。
+4. 等待約 30 秒至 1 分鐘，重新整理頁面，頂端就會出現綠色勾勾，網站正式上線於：
+   👉 **[https://joshu0601.github.io/0916/](https://joshu0601.github.io/0916/)**
+
+### 方案 B：使用 GitHub Actions 自動化部署
+1. 進入 [https://github.com/joshu0601/0916/settings/pages](https://github.com/joshu0601/0916/settings/pages)
+2. 在 **Build and deployment** > **Source** 中選擇 **GitHub Actions**。
+3. 進入 [Settings > Actions > General](https://github.com/joshu0601/0916/settings/actions)
+4. 滑到最底部的 **Workflow permissions**，選擇 **Read and write permissions**，並點擊 **Save**。
+5. 到 **Actions** 分頁點選最新運行的 workflow 或重新執行（Re-run all jobs），即可順利部署完成！
+
+---
+
+## 🔄 專案架構與工作流程 (Workflows)
+
+### 1. 前端客戶端資料流 (Client Runtime Data Flow)
 
 ```mermaid
 flowchart TD
-    subgraph Client ["Client Browser Runtime"]
-        subgraph Engine ["Time & Animation Engine"]
-            Clock["System Clock (Date API)"] --> Loop["requestAnimationFrame Loop (60 FPS)"]
-            Loop --> Digital["Digital Clock (HH:MM:SS + AM/PM)"]
-            Loop --> Bar["Seconds Progress Fill (0% - 100%)"]
-            Loop --> Analog["Analog Hands (Deg Rotation)"]
-            Loop --> Meta["Day Progress / Day of Year / Week"]
+    subgraph Client ["客戶端瀏覽器 (Browser Runtime)"]
+        subgraph Engine ["時鐘與動態引擎 (Clock Engine)"]
+            Clock["系統時鐘 (Date API)"] --> Loop["requestAnimationFrame Loop (60 FPS)"]
+            Loop --> Digital["數位時鐘 (HH : MM : SS + AM/PM)"]
+            Loop --> Bar["動態秒數進度條 (0% - 100%)"]
+            Loop --> Analog["指針時鐘 (時/分/秒針角度旋轉)"]
+            Loop --> Meta["今日時間進度 / 年內天數與週數"]
         end
 
-        subgraph Atmosphere ["Context Awareness"]
-            TZ["Intl.DateTimeFormat"] --> DetectTZ["Timezone & UTC Offset Calc"]
-            HourCheck["Hour Evaluation (00:00 - 23:59)"] --> Greet["Dynamic Greetings & Icons"]
-            TZ --> World["World Clocks (NY, London, Tokyo, Sydney)"]
+        subgraph Atmosphere ["環境感知 (Atmosphere)"]
+            TZ["Intl.DateTimeFormat"] --> DetectTZ["本地時區與 UTC 時差計算"]
+            HourCheck["小時判斷 (00:00 - 23:59)"] --> Greet["動態時段問候與天氣圖示"]
+            TZ --> World["世界時鐘 (紐約, 倫敦, 東京, 雪梨)"]
         end
 
-        subgraph UserState ["User State & Storage"]
-            EditModal["Profile Customizer Modal"] <--> LocalStorage[("Browser localStorage")]
-            ThemeSwitch["Theme Switcher (4 Palettes)"] <--> LocalStorage
-            FocusCard["Daily Focus & Goals Tracker"] <--> LocalStorage
-            SoundToggle["Audio Synthesizer"] --> WebAudio["Web Audio API Oscillator"]
+        subgraph UserState ["狀態管理 (User State)"]
+            EditModal["個人檔案編輯彈窗"] <--> LocalStorage[("瀏覽器 localStorage")]
+            ThemeSwitch["4 種色彩主題切換"] <--> LocalStorage
+            FocusCard["今日目標清單"] <--> LocalStorage
+            SoundToggle["音效合成器"] --> WebAudio["Web Audio API 音效振盪器"]
         end
     end
 ```
 
-### 2. GitHub Pages CI/CD Deployment Workflow
+### 2. GitHub Pages CI/CD 自動化部署流程
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Dev as Developer (Joshua)
-    participant Git as Local Git Repo
-    participant GH as GitHub (Remote: main)
-    participant GHA as GitHub Actions (deploy.yml)
-    participant Pages as GitHub Pages Host
+    actor Dev as 開發者 (Joshu)
+    participant Git as 本地 Git 倉庫
+    participant GH as GitHub (main 分支)
+    participant GHA as GitHub Actions (.github/workflows/deploy.yml)
+    participant Pages as GitHub Pages CDN
 
-    Dev->>Git: git commit (HTML, CSS, JS, assets)
+    Dev->>Git: git commit (HTML, CSS, JS, Assets)
     Dev->>GH: git push origin main
-    GH->>GHA: Trigger "Deploy to GitHub Pages" workflow
+    GH->>GHA: 觸發自動部署工作流程
     activate GHA
-    GHA->>GHA: actions/checkout@v4
-    GHA->>GHA: actions/configure-pages@v5
-    GHA->>GHA: actions/upload-pages-artifact@v3
-    GHA->>Pages: actions/deploy-pages@v4
+    GHA->>GHA: 檢出程式碼 (actions/checkout@v4)
+    GHA->>GHA: 打包乾淨靜態檔案至 _site 並加入 .nojekyll
+    GHA->>GHA: 上傳靜態製品 (actions/upload-pages-artifact@v3)
+    GHA->>Pages: 部署至 GitHub Pages (actions/deploy-pages@v4)
+    GHA->>GH: 同步推播至 gh-pages 分支 (Fallback)
     deactivate GHA
-    Pages-->>Dev: Live Website deployed at https://joshu0601.github.io/0916/
+    Pages-->>Dev: 網站成功發布至 https://joshu0601.github.io/0916/
 ```
 
 ---
 
-## 🚀 How to Enable GitHub Pages Deployment
+## 💻 本地端運行方式 (Local Development)
 
-This repository includes an automated GitHub Actions deployment workflow in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
-
-Follow these simple steps to activate your live site:
-
-1. **Open Repository Settings**:
-   - Go to [https://github.com/joshu0601/0916/settings/pages](https://github.com/joshu0601/0916/settings/pages).
-2. **Set Build and Deployment Source**:
-   - Under **Build and deployment** > **Source**, select **GitHub Actions**.
-3. **Trigger Deployment**:
-   - Every push to the `main` branch automatically builds and deploys the site.
-   - You can also trigger it manually under the **Actions** tab by selecting **Deploy to GitHub Pages** > **Run workflow**.
-4. **Access Your Live Website**:
-   - Your site will be published at: **[https://joshu0601.github.io/0916/](https://joshu0601.github.io/0916/)**
-
----
-
-## ✨ Features
-
-- ⏱️ **Real-Time Local Clock**:
-  - Millisecond-accurate rendering with live ticking seconds and seconds progression bar.
-  - Dual view modes: **Digital Precision** and **Minimalist Analog Clock**.
-  - Local timezone auto-detection (`Intl.DateTimeFormat`) and UTC offset display.
-  - Day progress percentage, day-of-year, and week-of-year tracking.
-- 🌅 **Dynamic Greetings**: Automatically adapts greetings and icons based on the user's local hour (morning, afternoon, evening, and night).
-- 🎨 **Multi-Theme Switcher**:
-  - **Midnight Obsidian**: Deep space dark mode with electric cyan & neon purple accents.
-  - **Aurora Borealis**: Mystic emerald & teal illumination.
-  - **Sunset Horizon**: Twilight plum with warm amber & coral glow.
-  - **Daylight Minimal**: Crisp, frosted glass with clean slate & ocean blue.
-- 👤 **Interactive Profile Editor**:
-  - Inline editing for name, title, bio, email, and status.
-  - State persisted locally using `localStorage`.
-- 🌍 **Global World Clocks**: Real-time relative clock comparisons for New York, London, Tokyo, and Sydney.
-- 🎯 **Daily Focus & Productivity**: Interactive checklist for daily goals with local persistence.
-- 🔊 **Audio Chime Toggle**: Subtle synthesized audio feedback via Web Audio API.
-
----
-
-## 💻 Local Development
-
-1. Clone the repository:
+1. 複製倉庫至本機：
    ```bash
    git clone https://github.com/joshu0601/0916.git
    cd 0916
    ```
 
-2. Run a lightweight local HTTP server:
+2. 啟動輕量靜態伺服器：
    ```bash
    python -m http.server 8000
    ```
 
-3. Open `http://localhost:8000` in your web browser.
+3. 於瀏覽器開啟 `http://localhost:8000` 即可檢視完整動態效果。
 
 ---
 
-## 🛠️ Built With
+## 🛠️ 技術棧 (Built With)
 
-- **HTML5**: Semantic, accessible document structure.
-- **Modern CSS**: Vanilla CSS with custom properties, backdrop blur glassmorphism, and responsive grid.
-- **Vanilla JavaScript**: Pure zero-dependency modern JS for real-time engine and state management.
-- **GitHub Actions**: Automated CI/CD deployment pipeline for GitHub Pages.
-- **Google Fonts**: Plus Jakarta Sans, Space Grotesk, and JetBrains Mono.
-- **FontAwesome**: Crisp modern vector icons.
+- **HTML5**：語意化結構、完整 SEO 與社群分享標籤。
+- **Modern CSS**：自定義 CSS 變數、進階玻璃態擬物美學（Glassmorphism）、流暢 60FPS CSS Keyframe 動畫。
+- **Vanilla JavaScript**：純原生 JavaScript、零外部打包工具相依、高效能 `requestAnimationFrame` 即時運算。
+- **Web Audio API**：原生音訊合成器（Oscillator）實作報時點擊音效。
+- **GitHub Actions & Pages**：自動化持續整合與靜態網頁託管。
+- **Google Fonts & FontAwesome**：Plus Jakarta Sans、Space Grotesk、JetBrains Mono、Noto Sans TC 與現代向量圖示。
 
 ---
 
 ## 📄 License
 
-MIT © [Joshua](https://github.com/joshu0601)
+MIT © [Joshu](https://github.com/joshu0601)

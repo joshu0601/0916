@@ -8,11 +8,13 @@
 
   // --- STATE & DEFAULTS ---
   const DEFAULT_PROFILE = {
-    name: 'Joshua',
+    name: 'Joshu',
+    dept: '資訊工程學系 (CSIE)',
+    specialty: '專長：Web Dev · AI/ML · IoT · 系統設計',
     role: 'Full-Stack Architect & Digital Explorer',
-    location: '',
+    location: 'Taipei, Taiwan',
     status: 'Available for projects',
-    bio: 'Passionate about building intuitive software, modern interfaces, and exploring the intersection of distributed systems and artificial intelligence.',
+    bio: '熱愛探索前沿軟體架構、人機互動介面與人工智慧應用，致力於打造高效能、具直覺美感與流暢互動體驗的現代化數位產品。',
     email: 'joshu0601@users.noreply.github.com',
     avatar: 'avatar.jpg'
   };
@@ -69,6 +71,8 @@
 
     // Profile Details
     profileName: document.getElementById('profile-name'),
+    profileDept: document.getElementById('profile-dept'),
+    profileSpecialty: document.getElementById('profile-specialty'),
     profileRole: document.getElementById('profile-role'),
     profileBio: document.getElementById('profile-bio'),
     profileLocation: document.getElementById('profile-location'),
@@ -89,6 +93,8 @@
 
     // Form inputs
     inputName: document.getElementById('input-name'),
+    inputDept: document.getElementById('input-dept'),
+    inputSpecialty: document.getElementById('input-specialty'),
     inputRole: document.getElementById('input-role'),
     inputLocation: document.getElementById('input-location'),
     inputStatus: document.getElementById('input-status'),
@@ -345,15 +351,17 @@
 
   function applyProfile(profile) {
     if (elements.profileName) elements.profileName.textContent = profile.name || DEFAULT_PROFILE.name;
-    if (elements.navTitle) elements.navTitle.textContent = `${profile.name}'s Space`;
+    if (elements.profileDept) elements.profileDept.textContent = profile.dept || DEFAULT_PROFILE.dept;
+    if (elements.profileSpecialty) elements.profileSpecialty.textContent = profile.specialty || DEFAULT_PROFILE.specialty;
+    if (elements.navTitle) elements.navTitle.textContent = `${profile.name || DEFAULT_PROFILE.name}'s Space`;
     if (elements.footerName) elements.footerName.textContent = profile.name || DEFAULT_PROFILE.name;
-    document.title = `${profile.name} — Personal Space & Real-Time Clock`;
+    document.title = `${profile.name || DEFAULT_PROFILE.name} — 個人首頁 & 即時時鐘`;
 
     if (elements.profileRole) elements.profileRole.textContent = profile.role || DEFAULT_PROFILE.role;
     if (elements.profileBio) elements.profileBio.textContent = profile.bio || DEFAULT_PROFILE.bio;
     if (elements.headerStatusText) elements.headerStatusText.textContent = profile.status || DEFAULT_PROFILE.status;
 
-    const loc = profile.location || Intl.DateTimeFormat().resolvedOptions().timeZone || 'Remote Space';
+    const loc = profile.location || Intl.DateTimeFormat().resolvedOptions().timeZone || 'Taipei, Taiwan';
     if (elements.profileLocation) elements.profileLocation.textContent = loc;
 
     if (elements.profileEmail) {
@@ -370,6 +378,8 @@
   function openEditModal() {
     const profile = getStoredProfile();
     elements.inputName.value = profile.name || '';
+    if (elements.inputDept) elements.inputDept.value = profile.dept || '';
+    if (elements.inputSpecialty) elements.inputSpecialty.value = profile.specialty || '';
     elements.inputRole.value = profile.role || '';
     elements.inputLocation.value = profile.location || '';
     elements.inputStatus.value = profile.status || '';
@@ -546,6 +556,8 @@
         e.preventDefault();
         const updated = {
           name: elements.inputName.value.trim() || DEFAULT_PROFILE.name,
+          dept: (elements.inputDept ? elements.inputDept.value.trim() : '') || DEFAULT_PROFILE.dept,
+          specialty: (elements.inputSpecialty ? elements.inputSpecialty.value.trim() : '') || DEFAULT_PROFILE.specialty,
           role: elements.inputRole.value.trim() || DEFAULT_PROFILE.role,
           location: elements.inputLocation.value.trim() || '',
           status: elements.inputStatus.value.trim() || DEFAULT_PROFILE.status,
@@ -556,7 +568,7 @@
         saveStoredProfile(updated);
         applyProfile(updated);
         closeEditModal();
-        showToast('Profile updated successfully!', 'fa-user-check');
+        showToast('個人檔案儲存成功！', 'fa-user-check');
       });
     }
 

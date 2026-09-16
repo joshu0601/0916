@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="obsidian">
+<html lang="zh-TW" data-theme="obsidian">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Space & Real-Time Clock</title>
-  <meta name="description" content="Personal portal featuring live local time, dynamic time-of-day greetings, interactive profile, and global timezones.">
+  <title>Joshu — 個人首頁 & 即時時鐘 (Personal Space & Live Clock)</title>
+  <meta name="description" content="Joshu 的個人專屬首頁，具備即時動態時鐘、個人介紹、核心技能、精選專案與多主題切換。">
   
   <!-- Modern Typography from Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   
   <!-- FontAwesome for sleek crisp icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -29,13 +29,16 @@
     <div class="container header-inner">
       <div class="brand">
         <span class="brand-badge"><i class="fa-solid fa-compass fa-spin" style="--fa-animation-duration: 18s;"></i></span>
-        <span class="brand-title" id="nav-title">Personal Space</span>
+        <span class="brand-title" id="nav-title">Joshu's Personal Space</span>
       </div>
 
-      <div class="header-status-pill">
-        <span class="pulse-dot"></span>
-        <span id="header-status-text">Available for projects</span>
-      </div>
+      <nav class="nav-links">
+        <a href="#profile-section" class="nav-link"><i class="fa-solid fa-user"></i> Profile</a>
+        <a href="#clock-section" class="nav-link"><i class="fa-regular fa-clock"></i> Live Clock</a>
+        <a href="#skills-section" class="nav-link"><i class="fa-solid fa-screwdriver-wrench"></i> Skills</a>
+        <a href="#projects-section" class="nav-link"><i class="fa-solid fa-rocket"></i> Projects</a>
+        <a href="#connect-section" class="nav-link"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+      </nav>
 
       <div class="header-actions">
         <button id="sound-toggle-btn" class="icon-btn" title="Toggle audio chime" aria-label="Toggle audio chime">
@@ -43,7 +46,7 @@
         </button>
 
         <div class="theme-dropdown">
-          <button id="theme-btn" class="icon-btn" title="Change color theme" aria-label="Change color theme">
+          <button id="theme-btn" class="icon-btn" title="切換色彩風格 (Theme)" aria-label="Change color theme">
             <i class="fa-solid fa-palette"></i>
           </button>
           <div class="theme-menu" id="theme-menu">
@@ -64,7 +67,7 @@
 
         <button id="open-edit-modal-btn" class="primary-btn sm">
           <i class="fa-solid fa-pen-to-square"></i>
-          <span>Edit Profile</span>
+          <span>編輯個人資料</span>
         </button>
       </div>
     </div>
@@ -73,14 +76,14 @@
   <!-- Main Content Layout -->
   <main class="container main-content">
     
-    <!-- Hero / Profile Banner -->
-    <section class="hero-section glass-card">
+    <!-- 👤 SECTION 1: PROFILE -->
+    <section class="hero-section glass-card" id="profile-section">
       <div class="hero-grid">
         <div class="avatar-col">
           <div class="avatar-frame">
-            <img id="profile-avatar-img" src="avatar.jpg" alt="Profile Avatar" class="avatar-image">
+            <img id="profile-avatar-img" src="avatar.jpg" alt="Joshu Avatar" class="avatar-image">
             <div class="avatar-live-ring"></div>
-            <button id="avatar-change-btn" class="avatar-badge-btn" title="Change Avatar URL">
+            <button id="avatar-change-btn" class="avatar-badge-btn" title="更換頭像網址">
               <i class="fa-solid fa-camera"></i>
             </button>
           </div>
@@ -96,49 +99,65 @@
               <i class="fa-solid fa-location-dot"></i>
               <span id="profile-location">Local Environment</span>
             </div>
+            <div class="status-badge-chip">
+              <span class="pulse-dot"></span>
+              <span id="header-status-text">Available for projects</span>
+            </div>
           </div>
 
           <h1 class="hero-name-row">
-            <span class="gradient-name" id="profile-name">Joshua</span>
-            <button class="quick-edit-icon-btn" id="inline-edit-name-btn" title="Click to edit name">
+            <span class="gradient-name" id="profile-name">Joshu</span>
+            <button class="quick-edit-icon-btn" id="inline-edit-name-btn" title="點擊編輯姓名">
               <i class="fa-solid fa-pen"></i>
             </button>
           </h1>
 
+          <!-- 科系與專長標籤 -->
+          <div class="profile-dept-row">
+            <div class="dept-badge">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span id="profile-dept">資訊工程學系 (CSIE)</span>
+            </div>
+            <div class="specialty-badge">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span id="profile-specialty">專長：Web Dev · AI/ML · IoT · 系統設計</span>
+            </div>
+          </div>
+
           <p class="hero-role" id="profile-role">Full-Stack Architect & Digital Explorer</p>
-          <p class="hero-bio" id="profile-bio">Passionate about building intuitive software, modern interfaces, and exploring the intersection of distributed systems and artificial intelligence.</p>
+          <p class="hero-bio" id="profile-bio">熱愛探索前沿軟體架構、人機互動介面與人工智慧應用，致力於打造高效能、具直覺美感與流暢互動體驗的現代化數位產品。</p>
 
           <div class="hero-actions-row">
+            <a href="https://github.com/joshu0601/0916" target="_blank" rel="noopener noreferrer" class="action-btn primary-action">
+              <i class="fa-brands fa-github"></i>
+              <span>GitHub 倉庫 (0916)</span>
+            </a>
             <button class="action-btn copy-time-btn" id="copy-time-btn">
               <i class="fa-regular fa-clock"></i>
-              <span>Copy Current Time</span>
+              <span>複製即時時間</span>
             </button>
-            <button class="action-btn share-btn" id="share-profile-btn">
-              <i class="fa-solid fa-share-nodes"></i>
-              <span>Share Profile</span>
-            </button>
-            <a href="#connect-section" class="action-btn contact-scroll-btn">
-              <i class="fa-solid fa-paper-plane"></i>
-              <span>Get in Touch</span>
+            <a href="#projects-section" class="action-btn secondary-action">
+              <i class="fa-solid fa-diagram-project"></i>
+              <span>查看專案作品</span>
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive Grid: Live Clock & Widgets -->
-    <div class="dashboard-grid">
+    <!-- 🕐 SECTION 4: LIVE CLOCK & DASHBOARD -->
+    <div class="dashboard-grid" id="clock-section">
       
       <!-- Primary Feature: Local Time Capsule -->
       <section class="glass-card clock-card">
         <div class="card-header">
           <div class="card-title-wrap">
             <span class="card-icon-tag"><i class="fa-regular fa-clock"></i></span>
-            <h2>My Local Time</h2>
+            <h2>即時時鐘 (Live Clock)</h2>
           </div>
           <div class="clock-mode-toggle">
-            <button id="clock-view-digital" class="mode-toggle-btn active">Digital</button>
-            <button id="clock-view-analog" class="mode-toggle-btn">Analog</button>
+            <button id="clock-view-digital" class="mode-toggle-btn active">數位 (Digital)</button>
+            <button id="clock-view-analog" class="mode-toggle-btn">指針 (Analog)</button>
           </div>
         </div>
 
@@ -160,12 +179,12 @@
             </div>
 
             <!-- Seconds progression bar -->
-            <div class="second-progress-wrapper" title="Seconds of current minute">
+            <div class="second-progress-wrapper" title="當前分鐘的秒數進度 (0-60s)">
               <div class="second-progress-bar" id="second-progress-fill"></div>
             </div>
 
             <div class="date-readout" id="clock-full-date">
-              Loading local calendar...
+              正在載入本地時間與日曆...
             </div>
           </div>
 
@@ -188,19 +207,19 @@
         <!-- Time Meta Information -->
         <div class="time-meta-grid">
           <div class="meta-item">
-            <span class="meta-label"><i class="fa-solid fa-earth-americas"></i> Local Timezone</span>
+            <span class="meta-label"><i class="fa-solid fa-earth-americas"></i> 本地時區</span>
             <span class="meta-value" id="tz-name">Detecting...</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label"><i class="fa-solid fa-stopwatch"></i> UTC Offset</span>
+            <span class="meta-label"><i class="fa-solid fa-stopwatch"></i> UTC 時差</span>
             <span class="meta-value" id="tz-offset">UTC+00:00</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label"><i class="fa-solid fa-calendar-week"></i> Week & Day</span>
+            <span class="meta-label"><i class="fa-solid fa-calendar-week"></i> 年內天數/週數</span>
             <span class="meta-value" id="tz-day-year">Day -- / Wk --</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label"><i class="fa-solid fa-chart-pie"></i> Day Progress</span>
+            <span class="meta-label"><i class="fa-solid fa-chart-pie"></i> 今日時間流逝</span>
             <span class="meta-value" id="tz-day-progress">0%</span>
           </div>
         </div>
@@ -211,15 +230,15 @@
         <div class="card-header">
           <div class="card-title-wrap">
             <span class="card-icon-tag"><i class="fa-solid fa-globe"></i></span>
-            <h2>World Clocks</h2>
+            <h2>全球世界時區 (World Clocks)</h2>
           </div>
-          <span class="card-badge">Live relative</span>
+          <span class="card-badge">即時相對時差</span>
         </div>
 
         <div class="world-cities-list">
           <div class="city-item" data-tz="America/New_York">
             <div class="city-info">
-              <span class="city-name">New York</span>
+              <span class="city-name">紐約 (New York)</span>
               <span class="city-diff" id="diff-ny">EST</span>
             </div>
             <div class="city-time" id="time-ny">--:-- --</div>
@@ -227,7 +246,7 @@
 
           <div class="city-item" data-tz="Europe/London">
             <div class="city-info">
-              <span class="city-name">London</span>
+              <span class="city-name">倫敦 (London)</span>
               <span class="city-diff" id="diff-london">GMT</span>
             </div>
             <div class="city-time" id="time-london">--:-- --</div>
@@ -235,7 +254,7 @@
 
           <div class="city-item" data-tz="Asia/Tokyo">
             <div class="city-info">
-              <span class="city-name">Tokyo</span>
+              <span class="city-name">東京 (Tokyo)</span>
               <span class="city-diff" id="diff-tokyo">JST</span>
             </div>
             <div class="city-time" id="time-tokyo">--:-- --</div>
@@ -243,30 +262,180 @@
 
           <div class="city-item" data-tz="Australia/Sydney">
             <div class="city-info">
-              <span class="city-name">Sydney</span>
+              <span class="city-name">雪梨 (Sydney)</span>
               <span class="city-diff" id="diff-sydney">AEST</span>
             </div>
             <div class="city-time" id="time-sydney">--:-- --</div>
           </div>
         </div>
       </section>
+    </div>
 
+    <!-- 🛠 SECTION 2: SKILLS -->
+    <section class="glass-card skills-showcase-card" id="skills-section">
+      <div class="card-header">
+        <div class="card-title-wrap">
+          <span class="card-icon-tag"><i class="fa-solid fa-screwdriver-wrench"></i></span>
+          <h2>核心技能專長 (Skills & Capabilities)</h2>
+        </div>
+        <span class="card-badge">多元技術棧</span>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-card-top">
+            <span class="skill-icon python"><i class="fa-brands fa-python"></i></span>
+            <span class="skill-level">進階精通</span>
+          </div>
+          <h3>Python</h3>
+          <p>數據分析、機器學習模型推論、自動化腳本與後端 API 服務開發。</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 90%;"></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-top">
+            <span class="skill-icon cpp"><i class="fa-solid fa-code"></i></span>
+            <span class="skill-level">核心基礎</span>
+          </div>
+          <h3>C / C++</h3>
+          <p>演算法實現、高效能底層運算、資料結構與嵌入式硬體系統開發。</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 85%;"></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-top">
+            <span class="skill-icon web"><i class="fa-brands fa-html5"></i></span>
+            <span class="skill-level">精選專案</span>
+          </div>
+          <h3>Web Development</h3>
+          <p>HTML5, Modern CSS (Glassmorphism), Vanilla JavaScript, 響應式佈局與現代前端設計。</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 92%;"></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-top">
+            <span class="skill-icon ai"><i class="fa-solid fa-brain"></i></span>
+            <span class="skill-level">研究實踐</span>
+          </div>
+          <h3>Machine Learning & AI</h3>
+          <p>神經網路、分類/回歸預測模型、邊緣端智慧推論與生成式 AI 應用探索。</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 80%;"></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-top">
+            <span class="skill-icon iot"><i class="fa-solid fa-microchip"></i></span>
+            <span class="skill-level">物聯網整合</span>
+          </div>
+          <h3>IoT (物聯網應用)</h3>
+          <p>微控制器開發、環境感測器整合、MQTT 輕量級通訊協議與智慧家庭原型。</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 78%;"></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card-top">
+            <span class="skill-icon data"><i class="fa-solid fa-chart-line"></i></span>
+            <span class="skill-level">數據洞察</span>
+          </div>
+          <h3>Data Analysis</h3>
+          <p>數據清洗、統計分析、Pandas / NumPy 數據處理與視覺化圖表建構。</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 84%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🚀 SECTION 3: PROJECTS -->
+    <section class="glass-card projects-section-card" id="projects-section">
+      <div class="card-header">
+        <div class="card-title-wrap">
+          <span class="card-icon-tag"><i class="fa-solid fa-rocket"></i></span>
+          <h2>精選作品與專案 (Featured Projects)</h2>
+        </div>
+        <span class="card-badge">作品集錦</span>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <article class="project-showcase-card featured">
+          <div class="project-badge-tag"><i class="fa-solid fa-star"></i> 現正上線</div>
+          <h3 class="project-title">0916 — Personal Web & Live Clock</h3>
+          <p class="project-desc">
+            個人專屬現代化數位儀表板，整合毫秒級即時時鐘、動態時段感應問候語、全球相對時差運算、4 款高質感玻璃態主題即時切換，並以純前端零相依架構實現流暢 60FPS 動畫與本地持久化儲存。
+          </p>
+
+          <div class="project-tech-tags">
+            <span class="tech-pill"><i class="fa-brands fa-html5"></i> HTML5</span>
+            <span class="tech-pill"><i class="fa-brands fa-css3-alt"></i> Modern CSS</span>
+            <span class="tech-pill"><i class="fa-brands fa-js"></i> Vanilla JS</span>
+            <span class="tech-pill"><i class="fa-solid fa-music"></i> Web Audio API</span>
+            <span class="tech-pill"><i class="fa-solid fa-code-branch"></i> GitHub Actions</span>
+          </div>
+
+          <div class="project-card-actions">
+            <a href="https://github.com/joshu0601/0916" target="_blank" rel="noopener noreferrer" class="project-link-btn primary">
+              <i class="fa-brands fa-github"></i> GitHub 倉庫
+            </a>
+            <a href="https://joshu0601.github.io/0916/" target="_blank" rel="noopener noreferrer" class="project-link-btn secondary">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> 線上體驗 (Live Demo)
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-showcase-card">
+          <div class="project-badge-tag upcoming"><i class="fa-solid fa-calendar-check"></i> 本學期預計完成專案</div>
+          <h3 class="project-title">Smart Edge AI & IoT Assistant</h3>
+          <p class="project-desc">
+            結合邊緣微控制器晶片與輕量化機器學習模型之智慧感測與環境監測助理，具備微秒級低延遲感測數據採集、異常特徵即時推論與 MQTT 雲端遠端通訊告警機制。
+          </p>
+
+          <div class="project-tech-tags">
+            <span class="tech-pill"><i class="fa-brands fa-python"></i> Python</span>
+            <span class="tech-pill"><i class="fa-solid fa-microchip"></i> C / C++</span>
+            <span class="tech-pill"><i class="fa-solid fa-wifi"></i> IoT & MQTT</span>
+            <span class="tech-pill"><i class="fa-solid fa-brain"></i> Machine Learning</span>
+            <span class="tech-pill"><i class="fa-solid fa-chart-pie"></i> Data Analysis</span>
+          </div>
+
+          <div class="project-card-actions">
+            <a href="https://github.com/joshu0601" target="_blank" rel="noopener noreferrer" class="project-link-btn primary">
+              <i class="fa-brands fa-github"></i> GitHub Profile
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Focus & Contact Grid -->
+    <div class="secondary-dashboard-grid">
       <!-- Personal Daily Focus & Goals Card -->
       <section class="glass-card focus-card">
         <div class="card-header">
           <div class="card-title-wrap">
             <span class="card-icon-tag"><i class="fa-solid fa-bullseye"></i></span>
-            <h2>Daily Focus</h2>
+            <h2>今日專注目標 (Daily Focus)</h2>
           </div>
-          <button id="add-focus-btn" class="icon-text-btn sm" title="Add a focus item">
-            <i class="fa-solid fa-plus"></i> Add
+          <button id="add-focus-btn" class="icon-text-btn sm" title="新增專注項目">
+            <i class="fa-solid fa-plus"></i> 新增
           </button>
         </div>
 
         <div class="focus-input-row" id="focus-input-row" style="display: none;">
-          <input type="text" id="new-focus-input" placeholder="What is your main priority today?" maxlength="80">
-          <button id="save-new-focus-btn" class="primary-btn xs">Save</button>
-          <button id="cancel-new-focus-btn" class="ghost-btn xs">Cancel</button>
+          <input type="text" id="new-focus-input" placeholder="今天最重要的目標是什麼？" maxlength="80">
+          <button id="save-new-focus-btn" class="primary-btn xs">儲存</button>
+          <button id="cancel-new-focus-btn" class="ghost-btn xs">取消</button>
         </div>
 
         <ul class="focus-list" id="focus-items-list">
@@ -274,41 +443,22 @@
         </ul>
       </section>
 
-      <!-- Skills & Passions Tags -->
-      <section class="glass-card skills-card">
-        <div class="card-header">
-          <div class="card-title-wrap">
-            <span class="card-icon-tag"><i class="fa-solid fa-sparkles"></i></span>
-            <h2>Areas of Craft</h2>
-          </div>
-        </div>
-
-        <div class="tags-cloud" id="skills-tags-container">
-          <span class="skill-pill"><i class="fa-solid fa-code"></i> Frontend Engineering</span>
-          <span class="skill-pill"><i class="fa-solid fa-wand-magic-sparkles"></i> UI/UX Design</span>
-          <span class="skill-pill"><i class="fa-solid fa-brain"></i> Applied AI</span>
-          <span class="skill-pill"><i class="fa-solid fa-server"></i> Cloud Infrastructure</span>
-          <span class="skill-pill"><i class="fa-solid fa-microchip"></i> System Design</span>
-          <span class="skill-pill"><i class="fa-solid fa-bolt"></i> Performance Optimization</span>
-        </div>
-      </section>
-
       <!-- Contact & Connect Card -->
       <section class="glass-card connect-card" id="connect-section">
         <div class="card-header">
           <div class="card-title-wrap">
             <span class="card-icon-tag"><i class="fa-solid fa-paper-plane"></i></span>
-            <h2>Connect & Reach Out</h2>
+            <h2>聯絡與連結 (Connect)</h2>
           </div>
         </div>
 
-        <p class="connect-desc">Looking to collaborate, discuss new ideas, or just say hello? My inbox is always open.</p>
+        <p class="connect-desc">歡迎交流專案想法、程式開發技術或合作機會！</p>
 
         <div class="email-copy-bar">
           <span class="email-display" id="profile-email">joshu0601@users.noreply.github.com</span>
           <button class="copy-email-btn" id="copy-email-action-btn">
             <i class="fa-regular fa-copy"></i>
-            <span id="copy-email-label">Copy Email</span>
+            <span id="copy-email-label">複製 Email</span>
           </button>
         </div>
 
@@ -327,24 +477,25 @@
           </a>
           <a href="mailto:joshu0601@users.noreply.github.com" class="social-chip" id="link-mail">
             <i class="fa-solid fa-envelope"></i>
-            <span>Mail</span>
+            <span>Email</span>
           </a>
         </div>
       </section>
-
     </div>
+
   </main>
 
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-left">
-        <p>© <span id="footer-year">2026</span> <span id="footer-name">Joshua</span>. Crafted with precision & style.</p>
+        <p>© <span id="footer-year">2026</span> <span id="footer-name">Joshu</span>. Personal Web with Live Clock & Personal Design.</p>
       </div>
       <div class="footer-right">
         <span class="tech-tag"><i class="fa-brands fa-html5"></i> HTML5</span>
-        <span class="tech-tag"><i class="fa-brands fa-css3-alt"></i> Modern CSS</span>
+        <span class="tech-tag"><i class="fa-brands fa-css3-alt"></i> Glassmorphic CSS</span>
         <span class="tech-tag"><i class="fa-brands fa-js"></i> Vanilla JS</span>
+        <span class="tech-tag"><i class="fa-solid fa-cloud-arrow-up"></i> GitHub Pages</span>
       </div>
     </div>
   </footer>
@@ -353,7 +504,7 @@
   <div class="modal-overlay" id="edit-modal-overlay">
     <div class="modal-card glass-modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
       <div class="modal-header">
-        <h3 id="modal-title"><i class="fa-solid fa-id-card"></i> Customize Profile</h3>
+        <h3 id="modal-title"><i class="fa-solid fa-id-card"></i> 編輯個人專屬檔案</h3>
         <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">
           <i class="fa-solid fa-xmark"></i>
         </button>
@@ -361,45 +512,55 @@
 
       <form id="profile-edit-form" class="modal-form">
         <div class="form-group">
-          <label for="input-name">Your Full Name</label>
-          <input type="text" id="input-name" required placeholder="e.g. Alex Rivera" maxlength="40">
+          <label for="input-name">姓名 (Name)</label>
+          <input type="text" id="input-name" required placeholder="例如：Joshu" maxlength="40">
         </div>
 
         <div class="form-group">
-          <label for="input-role">Title / Role</label>
-          <input type="text" id="input-role" required placeholder="e.g. Software Engineer & Designer" maxlength="60">
+          <label for="input-dept">科系 (Department)</label>
+          <input type="text" id="input-dept" placeholder="例如：資訊工程學系 (CSIE)" maxlength="50">
         </div>
 
         <div class="form-group">
-          <label for="input-location">Location / Timezone Label</label>
-          <input type="text" id="input-location" placeholder="e.g. San Francisco / Remote" maxlength="40">
+          <label for="input-specialty">專長 (Specialties)</label>
+          <input type="text" id="input-specialty" placeholder="例如：Web Dev · AI/ML · IoT" maxlength="60">
         </div>
 
         <div class="form-group">
-          <label for="input-status">Availability Status</label>
-          <input type="text" id="input-status" placeholder="e.g. Available for projects" maxlength="35">
+          <label for="input-role">職稱 / 副標題</label>
+          <input type="text" id="input-role" required placeholder="例如：Full-Stack Architect & Digital Explorer" maxlength="60">
         </div>
 
         <div class="form-group">
-          <label for="input-email">Contact Email</label>
-          <input type="email" id="input-email" placeholder="e.g. you@domain.com">
+          <label for="input-location">所在地 / 時區標籤</label>
+          <input type="text" id="input-location" placeholder="例如：Taipei, Taiwan" maxlength="40">
         </div>
 
         <div class="form-group">
-          <label for="input-bio">Short Bio</label>
-          <textarea id="input-bio" rows="3" placeholder="Tell the world about what you build and love..." maxlength="300"></textarea>
+          <label for="input-status">當前狀態</label>
+          <input type="text" id="input-status" placeholder="例如：Available for projects" maxlength="35">
         </div>
 
         <div class="form-group">
-          <label for="input-avatar">Avatar Image URL (or keep default)</label>
-          <input type="text" id="input-avatar" placeholder="avatar.jpg or https://...">
+          <label for="input-email">聯絡 Email</label>
+          <input type="email" id="input-email" placeholder="例如：joshu0601@users.noreply.github.com">
+        </div>
+
+        <div class="form-group">
+          <label for="input-bio">簡短自我介紹 (Bio)</label>
+          <textarea id="input-bio" rows="3" placeholder="介紹你自己的背景、熱情與開發理念..." maxlength="300"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="input-avatar">個人照片或 Avatar 網址</label>
+          <input type="text" id="input-avatar" placeholder="avatar.jpg 或 https://...">
         </div>
 
         <div class="modal-actions">
-          <button type="button" class="ghost-btn" id="reset-defaults-btn">Reset Defaults</button>
+          <button type="button" class="ghost-btn" id="reset-defaults-btn">恢復預設值</button>
           <div class="modal-btn-right">
-            <button type="button" class="ghost-btn" id="cancel-modal-btn">Cancel</button>
-            <button type="submit" class="primary-btn">Save Changes</button>
+            <button type="button" class="ghost-btn" id="cancel-modal-btn">取消</button>
+            <button type="submit" class="primary-btn">儲存變更</button>
           </div>
         </div>
       </form>

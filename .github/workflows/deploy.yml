@@ -5,13 +5,12 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# Permissions required for GitHub Pages & gh-pages branch deployment
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -26,15 +25,30 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup GitHub Pages
+      - name: Setup Pages
         uses: actions/configure-pages@v5
+
+      - name: Build and prepare static site
+        run: |
+          mkdir -p _site
+          cp index.html style.css script.js avatar.jpg image.png README.md _site/
+          # Prevent GitHub Pages from running Jekyll build
+          touch _site/.nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository root containing index.html, style.css, script.js, avatar.jpg, etc.
-          path: '.'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
+        continue-on-error: true
         uses: actions/deploy-pages@v4
+
+      - name: Deploy to gh-pages branch (Fallback)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
+          force_orphan: true
