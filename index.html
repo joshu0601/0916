@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="obsidian">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Space & Real-Time Clock</title>
+  <meta name="description" content="Personal portal featuring live local time, dynamic time-of-day greetings, interactive profile, and global timezones.">
+  
+  <!-- Modern Typography from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for sleek crisp icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow" aria-hidden="true">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <span class="brand-badge"><i class="fa-solid fa-compass fa-spin" style="--fa-animation-duration: 18s;"></i></span>
+        <span class="brand-title" id="nav-title">Personal Space</span>
+      </div>
+
+      <div class="header-status-pill">
+        <span class="pulse-dot"></span>
+        <span id="header-status-text">Available for projects</span>
+      </div>
+
+      <div class="header-actions">
+        <button id="sound-toggle-btn" class="icon-btn" title="Toggle audio chime" aria-label="Toggle audio chime">
+          <i class="fa-solid fa-volume-xmark" id="sound-icon"></i>
+        </button>
+
+        <div class="theme-dropdown">
+          <button id="theme-btn" class="icon-btn" title="Change color theme" aria-label="Change color theme">
+            <i class="fa-solid fa-palette"></i>
+          </button>
+          <div class="theme-menu" id="theme-menu">
+            <button class="theme-option active" data-theme="obsidian">
+              <span class="theme-swatch obsidian"></span> Midnight Obsidian
+            </button>
+            <button class="theme-option" data-theme="aurora">
+              <span class="theme-swatch aurora"></span> Aurora Borealis
+            </button>
+            <button class="theme-option" data-theme="sunset">
+              <span class="theme-swatch sunset"></span> Sunset Horizon
+            </button>
+            <button class="theme-option" data-theme="daylight">
+              <span class="theme-swatch daylight"></span> Daylight Minimal
+            </button>
+          </div>
+        </div>
+
+        <button id="open-edit-modal-btn" class="primary-btn sm">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <span>Edit Profile</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="container main-content">
+    
+    <!-- Hero / Profile Banner -->
+    <section class="hero-section glass-card">
+      <div class="hero-grid">
+        <div class="avatar-col">
+          <div class="avatar-frame">
+            <img id="profile-avatar-img" src="avatar.jpg" alt="Profile Avatar" class="avatar-image">
+            <div class="avatar-live-ring"></div>
+            <button id="avatar-change-btn" class="avatar-badge-btn" title="Change Avatar URL">
+              <i class="fa-solid fa-camera"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-details">
+          <div class="greeting-row">
+            <div class="greeting-chip" id="dynamic-greeting-chip">
+              <i class="fa-solid fa-sun" id="greeting-icon"></i>
+              <span id="greeting-text">Good morning</span>
+            </div>
+            <div class="location-chip" id="location-chip">
+              <i class="fa-solid fa-location-dot"></i>
+              <span id="profile-location">Local Environment</span>
+            </div>
+          </div>
+
+          <h1 class="hero-name-row">
+            <span class="gradient-name" id="profile-name">Joshua</span>
+            <button class="quick-edit-icon-btn" id="inline-edit-name-btn" title="Click to edit name">
+              <i class="fa-solid fa-pen"></i>
+            </button>
+          </h1>
+
+          <p class="hero-role" id="profile-role">Full-Stack Architect & Digital Explorer</p>
+          <p class="hero-bio" id="profile-bio">Passionate about building intuitive software, modern interfaces, and exploring the intersection of distributed systems and artificial intelligence.</p>
+
+          <div class="hero-actions-row">
+            <button class="action-btn copy-time-btn" id="copy-time-btn">
+              <i class="fa-regular fa-clock"></i>
+              <span>Copy Current Time</span>
+            </button>
+            <button class="action-btn share-btn" id="share-profile-btn">
+              <i class="fa-solid fa-share-nodes"></i>
+              <span>Share Profile</span>
+            </button>
+            <a href="#connect-section" class="action-btn contact-scroll-btn">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Get in Touch</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Grid: Live Clock & Widgets -->
+    <div class="dashboard-grid">
+      
+      <!-- Primary Feature: Local Time Capsule -->
+      <section class="glass-card clock-card">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <span class="card-icon-tag"><i class="fa-regular fa-clock"></i></span>
+            <h2>My Local Time</h2>
+          </div>
+          <div class="clock-mode-toggle">
+            <button id="clock-view-digital" class="mode-toggle-btn active">Digital</button>
+            <button id="clock-view-analog" class="mode-toggle-btn">Analog</button>
+          </div>
+        </div>
+
+        <div class="clock-display-area">
+          <!-- Digital View -->
+          <div id="digital-clock-container" class="digital-view active">
+            <div class="time-readout">
+              <div class="time-digits-group">
+                <span class="digit-box" id="clock-hours">00</span>
+                <span class="colon" id="colon-1">:</span>
+                <span class="digit-box" id="clock-minutes">00</span>
+                <span class="colon" id="colon-2">:</span>
+                <span class="digit-box" id="clock-seconds">00</span>
+              </div>
+              <div class="time-period-group">
+                <span class="period-badge" id="clock-period">AM</span>
+                <span class="seconds-ring-label" id="seconds-counter">00s</span>
+              </div>
+            </div>
+
+            <!-- Seconds progression bar -->
+            <div class="second-progress-wrapper" title="Seconds of current minute">
+              <div class="second-progress-bar" id="second-progress-fill"></div>
+            </div>
+
+            <div class="date-readout" id="clock-full-date">
+              Loading local calendar...
+            </div>
+          </div>
+
+          <!-- Analog View -->
+          <div id="analog-clock-container" class="analog-view">
+            <div class="analog-dial">
+              <div class="dial-center-pin"></div>
+              <div class="dial-notch notch-12"></div>
+              <div class="dial-notch notch-3"></div>
+              <div class="dial-notch notch-6"></div>
+              <div class="dial-notch notch-9"></div>
+              
+              <div class="analog-hand hour-hand" id="analog-hour-hand"></div>
+              <div class="analog-hand minute-hand" id="analog-minute-hand"></div>
+              <div class="analog-hand second-hand" id="analog-second-hand"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Time Meta Information -->
+        <div class="time-meta-grid">
+          <div class="meta-item">
+            <span class="meta-label"><i class="fa-solid fa-earth-americas"></i> Local Timezone</span>
+            <span class="meta-value" id="tz-name">Detecting...</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label"><i class="fa-solid fa-stopwatch"></i> UTC Offset</span>
+            <span class="meta-value" id="tz-offset">UTC+00:00</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label"><i class="fa-solid fa-calendar-week"></i> Week & Day</span>
+            <span class="meta-value" id="tz-day-year">Day -- / Wk --</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label"><i class="fa-solid fa-chart-pie"></i> Day Progress</span>
+            <span class="meta-value" id="tz-day-progress">0%</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Global World Clocks Comparison -->
+      <section class="glass-card world-clocks-card">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <span class="card-icon-tag"><i class="fa-solid fa-globe"></i></span>
+            <h2>World Clocks</h2>
+          </div>
+          <span class="card-badge">Live relative</span>
+        </div>
+
+        <div class="world-cities-list">
+          <div class="city-item" data-tz="America/New_York">
+            <div class="city-info">
+              <span class="city-name">New York</span>
+              <span class="city-diff" id="diff-ny">EST</span>
+            </div>
+            <div class="city-time" id="time-ny">--:-- --</div>
+          </div>
+
+          <div class="city-item" data-tz="Europe/London">
+            <div class="city-info">
+              <span class="city-name">London</span>
+              <span class="city-diff" id="diff-london">GMT</span>
+            </div>
+            <div class="city-time" id="time-london">--:-- --</div>
+          </div>
+
+          <div class="city-item" data-tz="Asia/Tokyo">
+            <div class="city-info">
+              <span class="city-name">Tokyo</span>
+              <span class="city-diff" id="diff-tokyo">JST</span>
+            </div>
+            <div class="city-time" id="time-tokyo">--:-- --</div>
+          </div>
+
+          <div class="city-item" data-tz="Australia/Sydney">
+            <div class="city-info">
+              <span class="city-name">Sydney</span>
+              <span class="city-diff" id="diff-sydney">AEST</span>
+            </div>
+            <div class="city-time" id="time-sydney">--:-- --</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Personal Daily Focus & Goals Card -->
+      <section class="glass-card focus-card">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <span class="card-icon-tag"><i class="fa-solid fa-bullseye"></i></span>
+            <h2>Daily Focus</h2>
+          </div>
+          <button id="add-focus-btn" class="icon-text-btn sm" title="Add a focus item">
+            <i class="fa-solid fa-plus"></i> Add
+          </button>
+        </div>
+
+        <div class="focus-input-row" id="focus-input-row" style="display: none;">
+          <input type="text" id="new-focus-input" placeholder="What is your main priority today?" maxlength="80">
+          <button id="save-new-focus-btn" class="primary-btn xs">Save</button>
+          <button id="cancel-new-focus-btn" class="ghost-btn xs">Cancel</button>
+        </div>
+
+        <ul class="focus-list" id="focus-items-list">
+          <!-- Dynamically populated from localStorage -->
+        </ul>
+      </section>
+
+      <!-- Skills & Passions Tags -->
+      <section class="glass-card skills-card">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <span class="card-icon-tag"><i class="fa-solid fa-sparkles"></i></span>
+            <h2>Areas of Craft</h2>
+          </div>
+        </div>
+
+        <div class="tags-cloud" id="skills-tags-container">
+          <span class="skill-pill"><i class="fa-solid fa-code"></i> Frontend Engineering</span>
+          <span class="skill-pill"><i class="fa-solid fa-wand-magic-sparkles"></i> UI/UX Design</span>
+          <span class="skill-pill"><i class="fa-solid fa-brain"></i> Applied AI</span>
+          <span class="skill-pill"><i class="fa-solid fa-server"></i> Cloud Infrastructure</span>
+          <span class="skill-pill"><i class="fa-solid fa-microchip"></i> System Design</span>
+          <span class="skill-pill"><i class="fa-solid fa-bolt"></i> Performance Optimization</span>
+        </div>
+      </section>
+
+      <!-- Contact & Connect Card -->
+      <section class="glass-card connect-card" id="connect-section">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <span class="card-icon-tag"><i class="fa-solid fa-paper-plane"></i></span>
+            <h2>Connect & Reach Out</h2>
+          </div>
+        </div>
+
+        <p class="connect-desc">Looking to collaborate, discuss new ideas, or just say hello? My inbox is always open.</p>
+
+        <div class="email-copy-bar">
+          <span class="email-display" id="profile-email">joshu0601@users.noreply.github.com</span>
+          <button class="copy-email-btn" id="copy-email-action-btn">
+            <i class="fa-regular fa-copy"></i>
+            <span id="copy-email-label">Copy Email</span>
+          </button>
+        </div>
+
+        <div class="social-links-row">
+          <a href="https://github.com/joshu0601/0916" target="_blank" rel="noopener noreferrer" class="social-chip" id="link-github">
+            <i class="fa-brands fa-github"></i>
+            <span>GitHub / 0916</span>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-chip" id="link-linkedin">
+            <i class="fa-brands fa-linkedin-in"></i>
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-chip" id="link-twitter">
+            <i class="fa-brands fa-x-twitter"></i>
+            <span>Twitter</span>
+          </a>
+          <a href="mailto:joshu0601@users.noreply.github.com" class="social-chip" id="link-mail">
+            <i class="fa-solid fa-envelope"></i>
+            <span>Mail</span>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <p>© <span id="footer-year">2026</span> <span id="footer-name">Joshua</span>. Crafted with precision & style.</p>
+      </div>
+      <div class="footer-right">
+        <span class="tech-tag"><i class="fa-brands fa-html5"></i> HTML5</span>
+        <span class="tech-tag"><i class="fa-brands fa-css3-alt"></i> Modern CSS</span>
+        <span class="tech-tag"><i class="fa-brands fa-js"></i> Vanilla JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Profile Edit Modal -->
+  <div class="modal-overlay" id="edit-modal-overlay">
+    <div class="modal-card glass-modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+      <div class="modal-header">
+        <h3 id="modal-title"><i class="fa-solid fa-id-card"></i> Customize Profile</h3>
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="profile-edit-form" class="modal-form">
+        <div class="form-group">
+          <label for="input-name">Your Full Name</label>
+          <input type="text" id="input-name" required placeholder="e.g. Alex Rivera" maxlength="40">
+        </div>
+
+        <div class="form-group">
+          <label for="input-role">Title / Role</label>
+          <input type="text" id="input-role" required placeholder="e.g. Software Engineer & Designer" maxlength="60">
+        </div>
+
+        <div class="form-group">
+          <label for="input-location">Location / Timezone Label</label>
+          <input type="text" id="input-location" placeholder="e.g. San Francisco / Remote" maxlength="40">
+        </div>
+
+        <div class="form-group">
+          <label for="input-status">Availability Status</label>
+          <input type="text" id="input-status" placeholder="e.g. Available for projects" maxlength="35">
+        </div>
+
+        <div class="form-group">
+          <label for="input-email">Contact Email</label>
+          <input type="email" id="input-email" placeholder="e.g. you@domain.com">
+        </div>
+
+        <div class="form-group">
+          <label for="input-bio">Short Bio</label>
+          <textarea id="input-bio" rows="3" placeholder="Tell the world about what you build and love..." maxlength="300"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="input-avatar">Avatar Image URL (or keep default)</label>
+          <input type="text" id="input-avatar" placeholder="avatar.jpg or https://...">
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="ghost-btn" id="reset-defaults-btn">Reset Defaults</button>
+          <div class="modal-btn-right">
+            <button type="button" class="ghost-btn" id="cancel-modal-btn">Cancel</button>
+            <button type="submit" class="primary-btn">Save Changes</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
