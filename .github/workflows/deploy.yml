@@ -5,11 +5,9 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
-# Permissions required for GitHub Pages & gh-pages branch deployment
+# Permissions required to publish to gh-pages branch
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: "pages"
@@ -17,38 +15,22 @@ concurrency:
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
       - name: Build and prepare static site
         run: |
           mkdir -p _site
-          cp index.html style.css script.js avatar.jpg image.png README.md _site/
-          # Prevent GitHub Pages from running Jekyll build
-          touch _site/.nojekyll
+          cp index.html style.css script.js avatar.jpg image.png README.md .nojekyll _site/
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: '_site'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        continue-on-error: true
-        uses: actions/deploy-pages@v4
-
-      - name: Deploy to gh-pages branch (Fallback)
+      - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           publish_branch: gh-pages
           force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
